@@ -38,7 +38,7 @@ A simple e-commerce web application built using the **MERN Stack** (MongoDB, Exp
 │ ├── routes # API routes
 │ ├── seed # Seed script for dummy data
 │ ├── server.js # Express server
-│ └── config/db.js # MongoDB connection
+│ └── db/config.js # MongoDB connection
 │
 ├── frontend
 │ ├── index.html # Basic HTML page
@@ -51,7 +51,7 @@ A simple e-commerce web application built using the **MERN Stack** (MongoDB, Exp
 ## ⚙️ Tech Stack
 
 - **Frontend**: HTML, CSS, JavaScript
-- **Backend**: Node.js, Express.js
+- **Backend**: Node.js, Express.js, Rest API
 - **Database**: MongoDB (Mongoose ODM)
 - **Auth**: JWT (JSON Web Tokens)
 - **Other**: bcryptjs, dotenv, nodemon
@@ -60,22 +60,19 @@ A simple e-commerce web application built using the **MERN Stack** (MongoDB, Exp
 
 ## 📦 Installation & Setup
 ```bash
-### 1️⃣ Clone Repository
+1️⃣ Clone Repository
 git clone https://github.com/101guptaji/e-Commerce_App.git
 cd e-Commerce_App
 
+2️⃣ Install Dependencies
 # Backend
 cd backend
 npm install
 
-# Frontend 
-index.html
-
 3️⃣ Setup Environment Variables
-
 Create a .env file in backend/:
 PORT=8080
-MONGO_ALTAS_URL="mongodb+srv://username:password@hgcluster1.bdq61.mongodb.net/eCommerceDB"
+MONGO_ALTAS_URL="mongodb+srv://<username>:<password>@hgcluster1.bdq61.mongodb.net/eCommerceDB"
 JWT_SECRET=your_secret_key
 
 4️⃣ Seed Dummy Data
