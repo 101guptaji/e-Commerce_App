@@ -1,8 +1,8 @@
 # 🛒 Simple E-Commerce Application (MERN Stack)
 
 A simple e-commerce web application built using the **MERN Stack** (MongoDB, Express.js, React.js, Node.js) with role-based authentication and basic shopping features.
-Frontend: https://e-commerce-app-eight-chi.vercel.app/
-Backend: https://e-commerce-app-tqs1.onrender.com/api
+-  Frontend: https://e-commerce-app-eight-chi.vercel.app/
+-  Backend: https://e-commerce-app-tqs1.onrender.com/
 ---
 
 ## 🚀 Features
