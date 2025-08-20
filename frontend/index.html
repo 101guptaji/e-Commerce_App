@@ -4,22 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MERN E-Commerce</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h2 { margin-top: 30px; }
-    button { margin: 5px; padding: 5px 10px; }
-    input, select { margin: 5px; padding: 5px; }
-    .product, .cart-item { border: 1px solid #ccc; padding: 10px; margin: 5px; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>🛒 Simple E-Commerce</h1>
 
   <!-- AUTH -->
   <h2>Authentication</h2>
-  <input type="text" id="email" placeholder="Email" />
-  <input type="password" id="password" placeholder="Password" />
-  <button onclick="register()">Register</button>
+  <input type="email" id="email" placeholder="Email" required/>
+  <input type="password" id="password" placeholder="Password" required/>
+  <button type="submit" onclick="register()">Register</button>
   <button onclick="login()">Login</button>
   <p id="authStatus"></p>
 

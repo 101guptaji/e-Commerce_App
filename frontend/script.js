@@ -1,4 +1,6 @@
+// const API_URL = "http://localhost:8080/api"; // backend URL
 const API_URL = "https://e-commerce-app-tqs1.onrender.com/api"; // backend URL
+
 let token = "";
 let page = 1;
 
@@ -10,10 +12,11 @@ async function register() {
         const res = await fetch(`${API_URL}/auth/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password, role: "customer" })
+            body: JSON.stringify({ email, password })
         });
         const data = await res.json();
-        alert("Registered: " + JSON.stringify(data));
+
+        alert(JSON.stringify(data.message));
     }
     catch (error) {
         alert("error in register");
@@ -32,8 +35,14 @@ async function login() {
             body: JSON.stringify({ email, password })
         });
         const data = await res.json();
+    
+        if(!res.ok){
+            alert(`error in login\n, ${data.message}`);
+            return;
+        }
+        
         token = data.token;
-        document.getElementById("authStatus").innerText = "Logged in as " + email;
+        document.getElementById("authStatus").innerText = "Logged in as " + data.user.email;
     }
     catch (error) {
         alert("error in login");
@@ -56,7 +65,7 @@ async function fetchProducts() {
             const div = document.createElement("div");
             div.className = "product";
             div.innerHTML = `
-          <b>${p.name}</b> - $${p.price} (${p.stock} in stock)
+          <b>${p.name}</b> - $${p.price} (${p.stock || 0} in stock)
           <button onclick="addToCart('${p._id}')">Add to Cart</button>
           <button onclick="deleteProduct('${p._id}')">Delete (Admin)</button>
         `;
