@@ -3,6 +3,7 @@
 A simple e-commerce web application built using the **MERN Stack** (MongoDB, Express.js, React.js, Node.js) with role-based authentication and basic shopping features.
 -  Frontend: https://e-commerce-app-eight-chi.vercel.app/
 -  Backend: https://e-commerce-app-tqs1.onrender.com/
+
 ---
 
 ## 🚀 Features
@@ -29,6 +30,14 @@ A simple e-commerce web application built using the **MERN Stack** (MongoDB, Exp
 - Deduct stock atomically during order creation
 - Store purchase price at order time
 
+### Dummy Credentials:
+-  admin:
+    email: admin@ecommerce.com
+    password: Admin@123
+-  Customer:
+    email: customer@ecommerce.com
+    password: Customer@123
+   
 ---
 <pre>
 ├── backend
