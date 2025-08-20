@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MERN E-Commerce</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h2 { margin-top: 30px; }
+    button { margin: 5px; padding: 5px 10px; }
+    input, select { margin: 5px; padding: 5px; }
+    .product, .cart-item { border: 1px solid #ccc; padding: 10px; margin: 5px; }
+  </style>
+</head>
+<body>
+  <h1>🛒 Simple E-Commerce</h1>
+
+  <!-- AUTH -->
+  <h2>Authentication</h2>
+  <input type="text" id="email" placeholder="Email" />
+  <input type="password" id="password" placeholder="Password" />
+  <button onclick="register()">Register</button>
+  <button onclick="login()">Login</button>
+  <p id="authStatus"></p>
+
+  <!-- PRODUCT LISTING -->
+  <h2>Products</h2>
+  <input type="text" id="search" placeholder="Search products..." />
+  <button onclick="fetchProducts()">Search</button>
+  <div id="products"></div>
+  <div>
+    <button onclick="prevPage()">Prev</button>
+    <span id="pageNum">1</span>
+    <button onclick="nextPage()">Next</button>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <h2>Admin Panel (Add Product)</h2>
+  <input type="text" id="pname" placeholder="Product Name" />
+  <input type="number" id="pprice" placeholder="Price" />
+  <input type="text" id="pcategory" placeholder="Category" />
+  <input type="number" id="pstock" placeholder="Stock" />
+  <button onclick="addProduct()">Add Product</button>
+
+  <!-- CART -->
+  <h2>Cart</h2>
+  <div id="cart"></div>
+  <button onclick="placeOrder()">Place Order</button>
+
+  <script src="./script.js">
+  </script>
+</body>
+</html>
