@@ -29,7 +29,7 @@ A simple e-commerce web application built using the **MERN Stack** (MongoDB, Exp
 - Store purchase price at order time
 
 ---
-
+<pre>
 ├── backend
 │ ├── controllers # Business logic
 │ ├── middleware # Auth middleware
@@ -45,7 +45,8 @@ A simple e-commerce web application built using the **MERN Stack** (MongoDB, Exp
 │ └── styles.css # Basic styles
 │
 └── README.md
-
+</pre>
+  
 ## ⚙️ Tech Stack
 
 - **Frontend**: HTML, CSS, JavaScript
@@ -110,3 +111,25 @@ open index.html   # or just open in browser
 ## Orders
 -  GET /api/order → get all orders
 -  POST /api/orders → Create new order
+
+## 👨‍💻 Roles
+Customer
+-  View products
+-  Search & paginate products
+-  Add products to cart
+-  Update/remove items from cart
+-  Place order
+
+Admin
+-  All customer permissions
+-  Add/update/delete products
+
+## 🧑‍🤝‍🧑 Contributing
+Contributions are welcome! Please fork the repo and submit a pull request.
+
+## 📜 License
+This project is licensed under the MIT License.
+
+
+
+
