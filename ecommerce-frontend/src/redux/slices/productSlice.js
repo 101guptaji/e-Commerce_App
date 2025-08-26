@@ -7,7 +7,7 @@ export const fetchProducts = createAsyncThunk("products/fetch",
             try {
                 const res = await API.get(`/products?page=${page}&search=${encodeURIComponent(search)}&category=${encodeURIComponent(category)}`);
                 
-                console.log(res, res.data);
+                // console.log(res, res.data);
                 return res.data;
             } 
             catch (error) {
