@@ -55,10 +55,19 @@ const productSlice = createSlice({
         })
         .addCase(fetchProducts.rejected, (state, action)=>{
             state.loading = false;
-            state.error = action.payload.message || 'Error';
+            state.error = action.payload?.message || 'Error';
+        })
+        .addCase(fetchProductById.pending, (state)=>{
+            state.loading = true;
+            state.error = null;
         })
         .addCase(fetchProductById.fulfilled, (state, action)=>{
+            state.loading = false;
             state.current = action.payload;
+        })
+        .addCase(fetchProductById.rejected, (state, action)=>{
+            state.loading = false;
+            state.error = action.payload?.message || 'Error';
         })
     }
 })
