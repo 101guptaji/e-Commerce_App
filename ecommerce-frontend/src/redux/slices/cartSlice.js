@@ -5,6 +5,7 @@ export const fetchCart = createAsyncThunk('cart/fetch',
     async (_, { rejectWithValue }) => {
         try {
             const res = await API.get('/cart');
+            // console.log("Cart", res.data);
             return res.data;
         }
         catch (error) {
@@ -88,7 +89,7 @@ const cartSlice = createSlice({
             })
             .addCase(addToCart.fulfilled, (state, { payload }) => {
                 state.loading = false;
-                state.items.push(payload.item);
+                state.items = payload.item;
             })
             .addCase(addToCart.rejected, (state, { payload }) => {
                 state.loading = false;
@@ -100,11 +101,7 @@ const cartSlice = createSlice({
             })
             .addCase(updateCartItem.fulfilled, (state, { payload }) => {
                 state.loading = false;
-                const item = state.items.find(item => item.id === payload.id);
-                if (item) {
-                    item.quantity = payload.quantity;
-                    item.price = payload.price;
-                }
+                state.items = payload.items
             })
             .addCase(updateCartItem.rejected, (state, { payload }) => {
                 state.loading = false;
@@ -116,7 +113,7 @@ const cartSlice = createSlice({
             })
             .addCase(removeFromCart.fulfilled, (state, { payload }) => {
                 state.loading = false;
-                state.items = state.items.filter(item => item.id !== payload.id);
+                state.items = payload.items
             })
             .addCase(removeFromCart.rejected, (state, { payload }) => {
                 state.loading = false;

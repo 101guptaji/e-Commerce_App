@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../redux/slices/productSlice';
+import { addToCart } from '../redux/slices/cartSlice';
 import toast from 'react-hot-toast';
 import ProductCard from '../components/ProductCard';
 import Pagination from '../components/Pagination';
@@ -23,12 +24,13 @@ const Home = () => {
     dispatch(fetchProducts({ page: 1, search }))
   }
 
-  const addCart = async () => {
+  const addCart = async (p) => {
     try {
+      await dispatch(addToCart({ productId: p._id })).unwrap();
       toast.success('Added to cart');
     }
     catch (error) {
-      toast.error(error?.message || 'Failed');
+      toast.error(error?.message || 'Failed to add to cart');
     }
   }
 
@@ -47,7 +49,7 @@ const Home = () => {
       {loading ? <div>Loading...</div> : (
         <>
           <div className="products-list">
-            {items.map(p=> <ProductCard key={p._id} product={p} addCart={addCart} />)}
+            {items.map(p => <ProductCard key={p._id} product={p} addCart={addCart} />)}
           </div>
           <Pagination page={page} pages={pages} onChange={onPageChange} />
         </>

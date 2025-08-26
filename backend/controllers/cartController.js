@@ -105,6 +105,7 @@ export const clearCart = async (req, res) => {
     const cart = await getOrCreateCart(req.user.id);
     cart.items = [];
     await cart.save();
+    await cart.populate("items.product");
     res.json(cart);
   }
   catch (err) {
