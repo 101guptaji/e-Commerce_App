@@ -5,6 +5,7 @@ export const fetchOrders = createAsyncThunk('order/fetchAll',
     async (_, { rejectWithValue }) => {
         try {
             const res = await API.get('/orders');
+            console.log("orders: ",res.data)
             return res.data;
         } 
         catch (error) {
@@ -41,7 +42,7 @@ const orderSlice = createSlice({
             })
             .addCase(fetchOrders.fulfilled, (state, { payload }) => {
                 state.loading = false;
-                state.orders = payload.orders;
+                state.orders = payload;
             })
             .addCase(fetchOrders.rejected, (state, { payload }) => {
                 state.loading = false;
@@ -53,7 +54,7 @@ const orderSlice = createSlice({
             })
             .addCase(placeOrder.fulfilled, (state, { payload }) => {
                 state.loading = false;
-                state.orders.push(payload.order);
+                state.orders = [...state.orders, payload];
             })
             .addCase(placeOrder.rejected, (state, { payload }) => {
                 state.loading = false;
