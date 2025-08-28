@@ -26,7 +26,7 @@ const Navbar = () => {
               <FaShoppingCart />
               Cart
             </Link>
-            {user?.name && <Link to="/profile">{user?.name}</Link>}
+            {/* {user?.name && <Link to="/profile">{user?.name}</Link>} */}
             <button onClick={handleLogout} className="logout-button">Logout</button>
           </>
         ) : (

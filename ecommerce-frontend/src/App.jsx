@@ -12,6 +12,22 @@ import AdminProducts from './pages/AdminProducts';
 import './App.css';
 
 function App() {
+  const PrivateRoute = ({children})=>{
+    const token = localStorage.getItem('token');
+    if(!token) {
+      return <Navigate to="/login" />;
+    }
+    return children;
+  }
+
+  const AdminRoute = ({children})=>{
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
+    if(!token || role !== 'admin') {
+      return <Navigate to="/" />;
+    }
+    return children;
+  }
 
   return (
     <Router>
@@ -21,12 +37,12 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/products/:id' element={<ProductDetails />} />
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/orders' element={<Orders />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/admin' element={<AdminProducts />} />
+          <Route path='/cart' element={<PrivateRoute><Cart /></PrivateRoute>} />
+          <Route path='/orders' element={<PrivateRoute><Orders /></PrivateRoute>} />
+          <Route path='/profile' element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path='/admin' element={<AdminRoute><AdminProducts /></AdminRoute>} />
         </Routes>
       </div>
     </Router>

@@ -2,8 +2,6 @@ import React from 'react'
 import '../styles/paginationStyle.css'
 
 const Pagination = ({ page, pages, onChange }) => {
-  if (pages <= 1)
-    return null
   const prev = () => onChange(Math.max(1, page - 1))
   const next = () => onChange(Math.min(pages, page + 1))
 

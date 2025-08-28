@@ -2,4 +2,5 @@
     position: relative;
     flex: 1;
     padding-top: 70px; /* Height of the navbar */
+    width: 100%;
 }

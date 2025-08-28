@@ -1,0 +1,60 @@
+.admin-products{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.admin-product-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 20px;
+}
+
+.admin-product-form input, textarea{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.admin-product-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 20px;
+}
+
+.admin-product-list ul{
+    list-style: none;
+    padding: 0;
+}
+
+.admin-product-list li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+
+.btns{
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.admin-product-list button{
+    background-color: #007bff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
