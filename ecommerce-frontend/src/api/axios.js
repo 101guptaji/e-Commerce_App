@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-// const API = axios.create({baseURL: 'http://localhost:8080/api'});
-const API = axios.create({baseURL: 'https://e-commerce-app-tqs1.onrender.com/api'});
+const API = axios.create({baseURL: `${import.meta.env.VITE_API_BASE}/api`});
 
 // Attach token to the request
 API.interceptors.request.use((req)=>{
