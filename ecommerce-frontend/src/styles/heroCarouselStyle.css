@@ -1,0 +1,352 @@
+/* Home banner: dark crimson / black slides with a floating product "blob" */
+.hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--header-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.hero :focus-visible {
+  outline-color: #fff;
+}
+
+.hero__viewport {
+  overflow: hidden;
+}
+
+.hero__track {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.hero__slide {
+  position: relative;
+  display: flex;
+  flex: 0 0 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 300px;
+  padding: 40px 96px;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* Decorative crimson glow + thin outline ring */
+.hero__slide::before {
+  content: '';
+  position: absolute;
+  top: -160px;
+  right: -40px;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 77, 90, 0.42) 0%, rgba(255, 77, 90, 0) 68%);
+  pointer-events: none;
+}
+
+.hero__slide::after {
+  content: '';
+  position: absolute;
+  bottom: -190px;
+  left: 30%;
+  width: 340px;
+  height: 340px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Every gradient stays dark where the text sits, so white text passes AA */
+.hero__slide--crimson {
+  background: linear-gradient(115deg, #0e0e10 0%, #3f0a10 50%, #9f1239 100%);
+}
+
+.hero__slide--noir {
+  background: linear-gradient(115deg, #09090b 0%, #1c1c20 55%, #34343b 100%);
+}
+
+.hero__slide--ember {
+  background: linear-gradient(115deg, #140606 0%, #7f1d1d 55%, #dc2626 100%);
+}
+
+.hero__slide--wine {
+  background: linear-gradient(115deg, #12060b 0%, #4c0519 55%, #881337 100%);
+}
+
+.hero__slide--graphite {
+  background: linear-gradient(115deg, #111113 0%, #27272a 55%, #3f3f46 100%);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-pill);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.hero__eyebrow::before {
+  content: '';
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--accent-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-bright);
+}
+
+.hero__title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.05;
+}
+
+.hero__text {
+  margin-top: 12px;
+  color: #e4e4e7;
+  font-size: 1.0625rem;
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 26px;
+  padding: 12px 26px;
+  background: #fff;
+  color: var(--ink);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 12px 26px -12px rgba(0, 0, 0, 0.7);
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+
+.hero__cta svg {
+  color: var(--accent);
+  transition: transform 0.2s ease;
+}
+
+.hero__cta:hover {
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.hero__cta:hover svg {
+  transform: translateX(3px);
+}
+
+.hero__cta:focus-visible {
+  outline-offset: 3px;
+}
+
+/* Product image in a soft floating "blob" */
+.hero__art {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 240px;
+  height: 240px;
+  padding: 34px;
+  background: #fff;
+  border-radius: 42% 58% 60% 40% / 45% 42% 58% 55%;
+  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.06), 0 26px 50px -14px rgba(0, 0, 0, 0.7);
+  animation: hero-float 6s ease-in-out infinite;
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(-2deg);
+  }
+}
+
+.hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.hero__icon {
+  width: 55%;
+  height: 55%;
+  color: var(--accent);
+}
+
+/* Glassy round arrows */
+.hero__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  backdrop-filter: blur(6px);
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.hero__arrow:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.hero .hero__arrow:focus-visible {
+  outline-offset: 2px;
+}
+
+.hero__arrow--prev {
+  left: 24px;
+}
+
+.hero__arrow--next {
+  right: 24px;
+}
+
+.hero__controls {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transform: translateX(-50%);
+}
+
+.hero__dots {
+  display: flex;
+}
+
+.hero__dot {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.hero__dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 4px;
+  transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+.hero__dot.is-active::before {
+  width: 22px;
+  background: var(--accent-bright);
+}
+
+.hero__toggle {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  font-size: 0.5625rem;
+}
+
+.hero__toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.hero--skeleton {
+  background: var(--surface);
+}
+
+.hero--skeleton .skeleton {
+  height: 300px;
+  border-radius: 0;
+}
+
+@media (max-width: 767px) {
+  .hero {
+    border-radius: var(--radius);
+  }
+
+  .hero__slide {
+    min-height: 190px;
+    gap: 12px;
+    padding: 22px 20px 44px;
+  }
+
+  .hero__slide::before {
+    top: -120px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+  }
+
+  .hero__title {
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+  }
+
+  .hero__text {
+    display: none;
+  }
+
+  .hero__eyebrow {
+    margin-bottom: 8px;
+    padding: 4px 10px;
+    font-size: 0.5625rem;
+    letter-spacing: 1px;
+  }
+
+  .hero__cta {
+    margin-top: 14px;
+    padding: 9px 18px;
+    font-size: 0.8125rem;
+  }
+
+  .hero__art {
+    width: 120px;
+    height: 120px;
+    padding: 16px;
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.06), 0 16px 30px -12px rgba(0, 0, 0, 0.7);
+  }
+
+  .hero__arrow {
+    display: none;
+  }
+
+  .hero--skeleton .skeleton {
+    height: 190px;
+  }
+}

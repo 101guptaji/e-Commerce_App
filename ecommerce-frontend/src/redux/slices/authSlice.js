@@ -1,6 +1,28 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import API from '../../api/axios';
 
+// Restore the signed-in user's profile (name, email, role) after a page reload.
+const readStoredUser = () => {
+    try {
+        const stored = localStorage.getItem('user');
+        if (stored) return JSON.parse(stored);
+    }
+    catch {
+        // Ignore malformed data and fall back to the token payload below.
+    }
+
+    // Sessions created before the profile was persisted: use the JWT payload.
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+    try {
+        const payload = JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+        return { id: payload.id, email: payload.email, role: payload.role };
+    }
+    catch {
+        return null;
+    }
+};
+
 export const registerUser = createAsyncThunk('auth/register',
     async (userData, { rejectWithValue }) => {
         try {
@@ -26,7 +48,7 @@ export const loginUser = createAsyncThunk('auth/login',
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        user: null,
+        user: readStoredUser(),
         token: localStorage.getItem('token') || null,
         role: localStorage.getItem('role') || null,
         loading: false,
@@ -39,6 +61,7 @@ const authSlice = createSlice({
             state.role = null;
             localStorage.removeItem('token');
             localStorage.removeItem('role');
+            localStorage.removeItem('user');
         },
     },
     extraReducers: (builder) => {
@@ -50,7 +73,7 @@ const authSlice = createSlice({
             .addCase(registerUser.fulfilled, (state) => {
                 state.loading = false;
             })
-            .addCase(registerUser.rejected, (state, {payload}) => {
+            .addCase(registerUser.rejected, (state, { payload }) => {
                 state.loading = false;
                 state.error = payload?.message || 'Register failed';
             })
@@ -58,15 +81,16 @@ const authSlice = createSlice({
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(loginUser.fulfilled, (state, {payload}) => {
+            .addCase(loginUser.fulfilled, (state, { payload }) => {
                 state.loading = false;
                 state.user = payload.user;
                 state.token = payload.token;
                 state.role = payload.user?.role;
                 localStorage.setItem('token', payload.token);
                 localStorage.setItem('role', payload.user?.role);
+                localStorage.setItem('user', JSON.stringify(payload.user ?? null));
             })
-            .addCase(loginUser.rejected, (state, {payload}) => {
+            .addCase(loginUser.rejected, (state, { payload }) => {
                 state.loading = false;
                 state.error = payload?.message || 'Login failed';
             });

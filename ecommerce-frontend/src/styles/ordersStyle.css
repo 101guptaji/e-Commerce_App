@@ -1,10 +1,459 @@
-.orders-container{
-    width: 100%;
-    display: flex;
+/* My Orders: filter sidebar + order cards with a crimson status tracker */
+.orders {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.orders__filters {
+  position: sticky;
+  top: calc(var(--header-height) + 16px);
+  flex-shrink: 0;
+  width: 260px;
+  overflow: hidden;
+}
+
+.orders__filters-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 18px 14px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.orders__filters-title {
+  font-size: 1.0625rem;
+  font-weight: 800;
+}
+
+.orders__clear {
+  color: var(--accent-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.orders__clear:hover {
+  text-decoration: underline;
+}
+
+.orders__group {
+  min-width: 0;
+  padding: 16px 12px 18px;
+  border: 0;
+}
+
+/* float makes the legend respect the fieldset padding like a normal heading */
+.orders__group-title {
+  float: left;
+  width: 100%;
+  margin: 0 0 10px;
+  padding: 0 6px;
+  color: var(--text-muted);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.orders__options {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  clear: both;
+}
+
+.orders__option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.orders__option:hover {
+  background: var(--surface-muted);
+}
+
+.orders__option input {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.orders__option:has(input:checked) {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+
+.orders__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.orders__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.orders__title {
+  font-size: 1.375rem;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+}
+
+.orders__summary {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.orders__search {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+  max-width: 420px;
+}
+
+.orders__search input {
+  width: 100%;
+  height: 42px;
+  padding: 0 46px 0 18px;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.orders__search input:focus {
+  outline: none;
+  background: var(--surface);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.14);
+}
+
+.orders__search-icon {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  transform: translateY(-50%);
+  background: var(--ink);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  pointer-events: none;
+}
+
+.orders__list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Order card */
+.ocard {
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.ocard:hover {
+  box-shadow: var(--shadow-raised);
+}
+
+.ocard__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  padding: 16px 20px;
+  background: var(--surface-muted);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.ocard__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+}
+
+.ocard__facts dt {
+  color: var(--text-muted);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.ocard__facts dd {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.oitem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+}
+
+.oitem + .oitem {
+  border-top: 1px solid var(--border-light);
+}
+
+.oitem__media {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  padding: 8px;
+  background: var(--surface-muted);
+  border-radius: 12px;
+}
+
+.oitem__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.oitem__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.oitem__name {
+  display: block;
+  overflow: hidden;
+  color: var(--text);
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+a.oitem__name:hover {
+  color: var(--accent-dark);
+  text-decoration: none;
+}
+
+.oitem__name.is-muted {
+  color: var(--text-muted);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.oitem__meta {
+  margin-top: 4px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.oitem__price {
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.ocard__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px 18px;
+  border-top: 1px solid var(--border-light);
+}
+
+.ocard__count {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Ordered -> Shipped -> Delivered tracker */
+.otrack {
+  display: flex;
+  flex: 1;
+  max-width: 440px;
+}
+
+.otrack__step {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.otrack__step::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 50%;
+  width: 100%;
+  height: 3px;
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.otrack__step:first-child::before {
+  display: none;
+}
+
+.otrack__step.is-done::before {
+  background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+}
+
+.otrack__dot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  background: var(--surface);
+  color: #fff;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  font-size: 0.5625rem;
+}
+
+.otrack__step.is-done {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.otrack__step.is-done .otrack__dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.14);
+}
+
+@media (max-width: 767px) {
+  /* Stretch panels to the screen width (long product names must not widen the page) */
+  .orders {
     flex-direction: column;
-    align-items: center;
-    padding: 20px 50px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-items: stretch;
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .orders__filters {
+    position: static;
+    width: 100%;
+  }
+
+  .orders__main {
+    width: 100%;
+  }
+
+  .orders__filters-head {
+    padding: 12px 14px 10px;
+  }
+
+  .orders__group {
+    padding: 10px 14px 12px;
+  }
+
+  .orders__group-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .orders__options {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .orders__option {
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    font-size: 0.8125rem;
+  }
+
+  .orders__option:has(input:checked) {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+  }
+
+  .orders__top {
+    padding: 14px;
+  }
+
+  .orders__title {
+    font-size: 1.125rem;
+  }
+
+  .orders__search {
+    flex-basis: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .ocard__head,
+  .oitem,
+  .ocard__foot {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .ocard__facts {
+    gap: 8px 20px;
+  }
+
+  .oitem__media {
+    width: 56px;
+    height: 56px;
+    padding: 6px;
+  }
+
+  .ocard__foot {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .otrack {
+    max-width: none;
+  }
+
+  .ocard__count {
+    text-align: right;
+  }
 }

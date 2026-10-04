@@ -1,0 +1,125 @@
+/* Footer: black with a crimson top stripe */
+.ftr {
+  position: relative;
+  margin-top: 32px;
+  background: var(--footer-bg);
+  color: #fff;
+  font-size: 0.8125rem;
+}
+
+.ftr::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-bright) 50%, var(--accent) 100%);
+}
+
+.ftr__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 52px 20px 36px;
+}
+
+.ftr__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+}
+
+.ftr__logo-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, var(--accent-bright) 0%, var(--accent) 55%, #7f1d1d 100%);
+  border-radius: 10px;
+  font-size: 0.8125rem;
+  letter-spacing: -0.5px;
+}
+
+.ftr__logo-dot {
+  color: var(--accent-bright);
+}
+
+.ftr__about {
+  max-width: 320px;
+  color: #a1a1aa;
+  line-height: 1.7;
+}
+
+.ftr__heading {
+  margin-bottom: 14px;
+  color: var(--accent-bright);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.ftr__col li + li {
+  margin-top: 10px;
+}
+
+.ftr__col a {
+  color: #e4e4e7;
+  transition: color 0.2s ease;
+}
+
+.ftr__col a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: var(--accent-bright);
+  text-underline-offset: 4px;
+}
+
+.ftr__perks li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #d4d4d8;
+}
+
+.ftr__perks svg {
+  flex-shrink: 0;
+  color: var(--accent-bright);
+}
+
+.ftr__bottom {
+  padding: 18px 16px;
+  border-top: 1px solid #222226;
+  color: #a1a1aa;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+@media (max-width: 991px) {
+  .ftr__inner {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ftr__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 575px) {
+  .ftr__inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    padding: 36px 16px 24px;
+  }
+
+  .ftr__col:last-child {
+    grid-column: 1 / -1;
+  }
+}

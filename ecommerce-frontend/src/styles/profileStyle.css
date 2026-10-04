@@ -1,0 +1,235 @@
+/* My Account: black greeting card + menu, personal information panel */
+.profile {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.profile__side {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 12px;
+  width: 280px;
+}
+
+.profile__hello {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+  overflow: hidden;
+  background: radial-gradient(circle at 100% 0%, rgba(220, 38, 38, 0.55) 0%, rgba(220, 38, 38, 0) 60%),
+    var(--header-bg);
+  color: #fff;
+}
+
+.profile__avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, var(--accent-bright) 0%, var(--accent) 55%, #7f1d1d 100%);
+  color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 18px -6px rgba(220, 38, 38, 0.7);
+  font-size: 1.125rem;
+  font-weight: 800;
+}
+
+.profile__hello-text {
+  min-width: 0;
+}
+
+.profile__hello-label {
+  color: #a1a1aa;
+  font-size: 0.75rem;
+}
+
+.profile__hello-name {
+  font-size: 1.0625rem;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.profile__nav {
+  overflow: hidden;
+  padding: 6px;
+}
+
+.profile__nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 13px 14px;
+  color: var(--text);
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: left;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.profile__nav-item:hover {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  text-decoration: none;
+}
+
+.profile__nav-icon {
+  flex-shrink: 0;
+  color: var(--accent);
+  font-size: 1.05rem;
+}
+
+.profile__nav-arrow {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+}
+
+.profile__count {
+  margin-left: auto;
+  padding: 0 8px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 10px;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  line-height: 20px;
+}
+
+.profile__count + .profile__nav-arrow {
+  margin-left: 0;
+}
+
+.profile__main {
+  flex: 1;
+  min-width: 0;
+  padding: 26px 32px 32px;
+}
+
+.profile__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  font-size: 1.375rem;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+}
+
+.profile__title svg {
+  color: var(--accent);
+  font-size: 1.125rem;
+}
+
+.profile__info {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+  gap: 14px;
+}
+
+.profile__info-item {
+  padding: 14px 16px;
+  background: var(--surface-muted);
+  border: 1px solid var(--border-light);
+  border-left: 3px solid var(--accent);
+  border-radius: 12px;
+}
+
+.profile__info-item dt {
+  margin-bottom: 4px;
+  color: var(--text-muted);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.profile__info-item dd {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.profile__subtitle {
+  margin: 32px 0 12px;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.profile__quick {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+  gap: 12px;
+}
+
+.profile__quick-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  color: var(--text);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.profile__quick-link:hover {
+  transform: translateY(-2px);
+  border-color: transparent;
+  box-shadow: var(--shadow-raised);
+  text-decoration: none;
+}
+
+.profile__quick-link strong {
+  display: block;
+  font-weight: 700;
+}
+
+.profile__quick-link small {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.profile__quick-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 13px;
+  transition: background-color 0.2s ease;
+}
+
+.profile__quick-link:hover .profile__quick-icon {
+  background: var(--accent);
+}
+
+@media (max-width: 767px) {
+  .profile {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .profile__side {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .profile__main {
+    width: 100%;
+    padding: 20px 16px 24px;
+  }
+
+  .profile__title {
+    font-size: 1.125rem;
+  }
+}

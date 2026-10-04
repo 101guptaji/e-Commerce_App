@@ -1,0 +1,59 @@
+.cdlg {
+  width: min(440px, calc(100vw - 32px));
+  max-width: none;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  color: var(--text);
+  border: 0;
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5);
+}
+
+.cdlg::backdrop {
+  background: rgba(8, 8, 10, 0.6);
+  backdrop-filter: blur(3px);
+}
+
+.cdlg[open] {
+  animation: cdlg-in 0.2s ease-out;
+}
+
+@keyframes cdlg-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.cdlg__body {
+  padding: 26px 26px 22px;
+}
+
+.cdlg__title {
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.cdlg__message {
+  margin-bottom: 24px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.cdlg__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.cdlg__actions .btn {
+  min-width: 110px;
+}

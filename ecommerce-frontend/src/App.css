@@ -1,6 +1,19 @@
-.container{
-    position: relative;
-    flex: 1;
-    padding-top: 70px; /* Height of the navbar */
-    width: 100%;
+/* App shell: sticky header, flexible main area, footer pinned to the bottom */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* Safety net: never let stray content make the page wider than the screen
+     (which makes phones zoom out and the header/footer look narrow).
+     `clip` (unlike `hidden`) keeps the sticky header working. */
+  overflow-x: clip;
+}
+
+.app-main {
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+.app-main:focus {
+  outline: none;
 }

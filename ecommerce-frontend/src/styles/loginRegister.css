@@ -1,46 +1,293 @@
-.login{
-    margin: 50% auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Login / Register: black intro panel with a crimson glow + form panel */
+.auth {
+  display: flex;
+  justify-content: center;
+  padding-top: 36px;
+  padding-bottom: 36px;
 }
 
-.login h2{
-    text-align: center;
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    font-weight: bold;
+.auth__card {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  min-height: 540px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
 }
 
-.login-form{
-    display: flex;
+.auth__aside {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 42%;
+  padding: 44px 36px;
+  overflow: hidden;
+  background: radial-gradient(circle at 12% 110%, rgba(220, 38, 38, 0.7) 0%, rgba(220, 38, 38, 0) 55%),
+    radial-gradient(circle at 110% -10%, rgba(255, 77, 90, 0.35) 0%, rgba(255, 77, 90, 0) 45%),
+    var(--header-bg);
+  color: #fff;
+}
+
+.auth__aside::after {
+  content: '';
+  position: absolute;
+  right: -120px;
+  bottom: -120px;
+  width: 300px;
+  height: 300px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.auth__title {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  line-height: 1.15;
+}
+
+.auth__subtitle {
+  margin-top: 14px;
+  color: #e4e4e7;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.auth__perks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 28px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.auth__perks li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.auth__perks svg {
+  flex-shrink: 0;
+  color: var(--accent-bright);
+}
+
+.auth__art {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  align-self: center;
+  width: 150px;
+  height: 150px;
+  margin-top: auto;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--accent-bright);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 40px;
+  box-shadow: 0 0 60px rgba(220, 38, 38, 0.4);
+  font-size: 4rem;
+  transform: rotate(-8deg);
+}
+
+.auth__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 52px 40px 28px;
+}
+
+.auth__form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Outlined inputs with a label that floats to the top */
+.float-field {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.float-field input {
+  width: 100%;
+  height: 56px;
+  padding: 22px 16px 6px;
+  background: var(--surface);
+  border: 1px solid var(--input-border);
+  border-radius: 12px;
+  outline: none;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.float-field input:hover {
+  border-color: #6b6b73;
+}
+
+.float-field input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.14);
+}
+
+.float-field input[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+.float-field label {
+  position: absolute;
+  top: 17px;
+  left: 17px;
+  color: var(--text-muted);
+  font-size: 1rem;
+  pointer-events: none;
+  transition: top 0.15s ease, font-size 0.15s ease, color 0.15s ease;
+}
+
+.float-field input:focus + label,
+.float-field input:not(:placeholder-shown) + label {
+  top: 8px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* Kept separate: an unsupported selector would invalidate the whole rule */
+.float-field input:-webkit-autofill + label {
+  top: 8px;
+  font-size: 0.6875rem;
+}
+
+.float-field input:focus + label {
+  color: var(--accent-dark);
+}
+
+.float-field--password input {
+  padding-right: 54px;
+}
+
+.float-field__toggle {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  border-radius: 50%;
+  font-size: 1.05rem;
+}
+
+.float-field__toggle:hover {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+/* Live password checklist */
+.pw-rules {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+  margin: -6px 0 18px;
+  font-size: 0.75rem;
+}
+
+.pw-rules li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+}
+
+.pw-rules svg {
+  flex-shrink: 0;
+}
+
+.pw-rules li.is-met {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.pw-rules li.is-error {
+  grid-column: 1 / -1;
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.auth__error {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  background: var(--danger-soft);
+  color: var(--danger);
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.auth__error svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.auth__submit {
+  margin-top: 8px;
+}
+
+.auth__switch {
+  margin-top: auto;
+  padding-top: 32px;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  text-align: center;
+}
+
+.auth__switch a {
+  font-weight: 700;
+}
+
+@media (max-width: 767px) {
+  .auth {
+    padding: 0;
+  }
+
+  .auth__card {
     flex-direction: column;
-    gap: 1rem;
-    width: 300px;
-}
+    min-height: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
 
-.login-form input{
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+  .auth__aside {
+    width: 100%;
+    padding: 26px 20px;
+  }
 
-.login-form button{
-    padding: 0.5rem;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-}
+  .auth__title {
+    font-size: 1.5rem;
+  }
 
-.login-form button:disabled{
-    background-color: #ccc;
-}
+  .auth__subtitle {
+    margin-top: 8px;
+    font-size: 0.9375rem;
+  }
 
-.login p{
-    text-align: center;
+  .auth__perks,
+  .auth__art {
+    display: none;
+  }
+
+  .auth__main {
+    padding: 28px 20px 24px;
+  }
+
+  .pw-rules {
+    grid-template-columns: 1fr;
+  }
 }

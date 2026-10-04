@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import API from '../../api/axios';
+import { logout } from './authSlice';
+import { placeOrder } from './orderSlice';
 
 export const fetchCart = createAsyncThunk('cart/fetch',
     async (_, { rejectWithValue }) => {
         try {
             const res = await API.get('/cart');
-            // console.log("Cart", res.data);
             return res.data;
         }
         catch (error) {
@@ -62,78 +63,56 @@ export const clearCart = createAsyncThunk('cart/clear',
     }
 )
 
+const initialState = {
+    items: [],
+    status: 'idle', // idle | loading | succeeded | failed (cart fetch)
+    error: null,
+};
+
+// Every cart endpoint (including POST /cart) responds with the whole cart document.
+const applyCart = (state, payload) => {
+    state.items = Array.isArray(payload?.items) ? payload.items : [];
+};
+
 const cartSlice = createSlice({
     name: 'cart',
-    initialState: {
-        items: [],
-        loading: false,
-        error: null,
-    },
+    initialState,
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(fetchCart.pending, (state) => {
-                state.loading = true;
+                state.status = 'loading';
                 state.error = null;
             })
             .addCase(fetchCart.fulfilled, (state, { payload }) => {
-                state.loading = false;
-                state.items = payload.items;
+                state.status = 'succeeded';
+                applyCart(state, payload);
             })
             .addCase(fetchCart.rejected, (state, { payload }) => {
-                state.loading = false;
+                state.status = 'failed';
                 state.error = payload?.message || 'Fetch cart failed';
             })
-            .addCase(addToCart.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
             .addCase(addToCart.fulfilled, (state, { payload }) => {
-                state.loading = false;
-                state.items = payload.item;
-            })
-            .addCase(addToCart.rejected, (state, { payload }) => {
-                state.loading = false;
-                state.error = payload?.message || 'Add to cart failed';
-            })
-            .addCase(updateCartItem.pending, (state) => {
-                state.loading = true;
-                state.error = null;
+                applyCart(state, payload);
             })
             .addCase(updateCartItem.fulfilled, (state, { payload }) => {
-                state.loading = false;
-                state.items = payload.items
-            })
-            .addCase(updateCartItem.rejected, (state, { payload }) => {
-                state.loading = false;
-                state.error = payload?.message || 'Update cart item failed';
-            })
-            .addCase(removeFromCart.pending, (state) => {
-                state.loading = true;
-                state.error = null;
+                applyCart(state, payload);
             })
             .addCase(removeFromCart.fulfilled, (state, { payload }) => {
-                state.loading = false;
-                state.items = payload.items
-            })
-            .addCase(removeFromCart.rejected, (state, { payload }) => {
-                state.loading = false;
-                state.error = payload?.message || 'Remove from cart failed';
-            })
-            .addCase(clearCart.pending, (state) => {
-                state.loading = true;
-                state.error = null;
+                applyCart(state, payload);
             })
             .addCase(clearCart.fulfilled, (state) => {
-                state.loading = false;
                 state.items = [];
-                state.totalQuantity = 0;
-                state.totalPrice = 0;
             })
-            .addCase(clearCart.rejected, (state, { payload }) => {
-                state.loading = false;
-                state.error = payload?.message || 'Clear cart failed';
-            });
+            // The server empties the cart as part of checkout.
+            .addCase(placeOrder.fulfilled, (state) => {
+                state.items = [];
+            })
+            .addCase(logout, () => initialState);
     },
 });
+
+export const selectCartCount = (state) =>
+    state.cart.items.reduce((count, item) => count + (Number(item?.quantity) || 0), 0);
 
 export default cartSlice.reducer;
